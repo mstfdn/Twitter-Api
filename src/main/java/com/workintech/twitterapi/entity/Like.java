@@ -21,4 +21,5 @@ public class Like {
 
     @NotNull
     private Long userId;
+
 }
