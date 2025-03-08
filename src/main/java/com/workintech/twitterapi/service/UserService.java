@@ -2,6 +2,7 @@ package com.workintech.twitterapi.service;
 
 import com.workintech.twitterapi.entity.User;
 import com.workintech.twitterapi.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,17 +16,34 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public User registerUser(User user) {
-        // Şifreyi hashle
-        // Şifreyi kayıt öncesinde hashleyerek veritabanına güvenli bir şekilde kaydedebiliriz.
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-
-        // Kullanıcıyı kaydet
-        return userRepository.save(user);
+    // Kullanıcıyı veritabanına ekleme metodu
+    public void addUser(String username, String password, String email) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(password)); // Şifreyi şifrele
+        user.setEmail(email);
+        userRepository.save(user); // Kullanıcıyı veritabanına kaydet
+        System.out.println("Kullanıcı başarıyla eklendi.");
     }
 
-    public User findByUsername(String username) {
+    // Kullanıcıyı kullanıcı adı ile alma metodu
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    // Kullanıcı doğrulama metodu
+    public boolean authenticate(String username, String password) {
+        User user = getUserByUsername(username);
+        if (user != null) {
+            return passwordEncoder.matches(password, user.getPassword());
+        }
+        return false;
+    }
+
+    // Uygulama başlatıldığında kullanıcıyı ekleme
+    @PostConstruct
+    public void init() {
+        // Kullanıcıyı ekle
+        addUser("mustafa", "1234", "mustafa@example.com");
     }
 }
