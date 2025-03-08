@@ -40,10 +40,6 @@ public class UserService {
         return false;
     }
 
-    // Uygulama başlatıldığında kullanıcıyı ekleme
-    @PostConstruct
-    public void init() {
-        // Kullanıcıyı ekle
-        addUser("mustafa", "1234", "mustafa@example.com");
-    }
+
+
 }
