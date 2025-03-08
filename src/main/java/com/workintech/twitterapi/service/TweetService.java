@@ -5,6 +5,7 @@ import com.workintech.twitterapi.repository.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,8 +27,14 @@ public class TweetService {
     }
 
     public Tweet updateTweet(Long id, Tweet tweet) {
-        tweet.setId(id);
-        return tweetRepository.save(tweet);
+        Tweet existingTweet = tweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tweet not found with id: " + id));
+
+        existingTweet.setContent(tweet.getContent());
+        existingTweet.setUpdateAt(LocalDateTime.now());
+        // Diğer gerekli alanları güncelleyin
+
+        return tweetRepository.save(existingTweet);
     }
 
     public void deleteTweet(Long id) {

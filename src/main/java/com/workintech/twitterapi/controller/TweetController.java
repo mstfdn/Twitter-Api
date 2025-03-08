@@ -30,7 +30,7 @@ public class TweetController {
         return ResponseEntity.ok(tweetService.getTweetById(id));
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Tweet> updateTweet(@PathVariable Long id, @RequestBody Tweet tweet) {
         return ResponseEntity.ok(tweetService.updateTweet(id, tweet));
     }

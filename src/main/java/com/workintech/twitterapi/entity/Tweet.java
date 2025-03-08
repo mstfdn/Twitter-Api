@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @Table(name = "Tweet")
 public class Tweet {
@@ -28,4 +26,57 @@ public class Tweet {
 
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    // Boş constructor
+    public Tweet() {
+    }
+
+    // Tüm parametreli constructor
+    public Tweet(Long id, String content, Long userId, LocalDateTime createdAt, LocalDateTime updateAt) {
+        this.id = id;
+        this.content = content;
+        this.userId = userId;
+        this.createdAt = createdAt;
+        this.updateAt = updateAt;
+    }
 }

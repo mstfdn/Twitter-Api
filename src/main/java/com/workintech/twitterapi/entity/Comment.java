@@ -3,21 +3,23 @@ package com.workintech.twitterapi.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Comment")
 public class Comment {
+
+    private LocalDateTime createdAt;
+    private Long id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
     @NotNull
     private Long tweetId;
@@ -29,5 +31,43 @@ public class Comment {
     @Size(max = 280)
     private String content;
 
-    private LocalDateTime createdAt;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Long getTweetId() {
+        return tweetId;
+    }
+
+    public void setTweetId(Long tweetId) {
+        this.tweetId = tweetId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

@@ -22,4 +22,9 @@ public class Like {
     @NotNull
     private Long userId;
 
+    public Long getId() {
+        return id;
+    }
+
+    // Diğer getter ve setter metodları...
 }

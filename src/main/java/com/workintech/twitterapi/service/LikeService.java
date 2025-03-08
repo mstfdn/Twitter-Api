@@ -16,7 +16,10 @@ public class LikeService {
     }
 
     public void dislikeTweet(Long tweetId, Long userId) {
-        likeRepository.deleteById(likeRepository.findByTweetIdAndUserId(tweetId, userId).getId());
+        Like like = likeRepository.findByTweetIdAndUserId(tweetId, userId);
+        if (like != null) {
+            likeRepository.deleteById(like.getId());
+        }
     }
 
     public boolean isLiked(Long tweetId, Long userId) {
