@@ -1,5 +1,6 @@
 package com.workintech.twitterapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -18,10 +19,12 @@ public class Like {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tweet_id")
+    @JsonBackReference(value = "tweet-likes")
     private Tweet tweet;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference(value = "user-likes")
     private User user;
 
     public Long getId() {

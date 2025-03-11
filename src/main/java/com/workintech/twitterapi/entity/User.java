@@ -1,5 +1,6 @@
 package com.workintech.twitterapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +17,19 @@ public class User {
     private String username;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Tweet> tweets = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "user-comments")
     private List<Comment> comments = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "user-likes")
     private List<Like> likes = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "user-retweets")
     private List<Retweet> retweets = new ArrayList<>();
 
     public User() {

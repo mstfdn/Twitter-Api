@@ -1,5 +1,7 @@
 package com.workintech.twitterapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -23,15 +25,19 @@ public class Tweet {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
     
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "tweet-comments")
     private List<Comment> comments = new ArrayList<>();
     
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "tweet-likes")
     private List<Like> likes = new ArrayList<>();
     
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "tweet-retweets")
     private List<Retweet> retweets = new ArrayList<>();
 
     private LocalDateTime createdAt;

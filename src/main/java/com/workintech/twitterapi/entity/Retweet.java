@@ -1,5 +1,6 @@
 package com.workintech.twitterapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,10 +18,12 @@ public class Retweet {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tweet_id")
+    @JsonBackReference(value = "tweet-retweets")
     private Tweet tweet;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference(value = "user-retweets")
     private User user;
 
     // Eski metodlar uyumluluk için kalabilir
