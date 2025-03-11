@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.workintech.twitterapi.service.CustomUserDetailsService;
+import org.springframework.security.config.Customizer;
 
 import java.util.Collections;
 
@@ -39,15 +40,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
+                        .requestMatchers("/register", "/login").permitAll()
+                        .requestMatchers("/tweet/**").authenticated()
+                        .anyRequest().permitAll()
                 )
-                .formLogin(form -> form
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .permitAll()
-                );
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }

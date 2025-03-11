@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
     // Belirli bir tweet ve kullanıcı için Like nesnesini bul
-    Like findByTweetIdAndUserId(Long tweetId, Long userId);
+    Like findByTweet_IdAndUser_Id(Long tweetId, Long userId);
 
     // Tweet ve kullanıcı için Like var mı kontrol et
-    boolean existsByTweetIdAndUserId(Long tweetId, Long userId);
+    boolean existsByTweet_IdAndUser_Id(Long tweetId, Long userId);
 }

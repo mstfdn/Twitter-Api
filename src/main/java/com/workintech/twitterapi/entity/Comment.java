@@ -14,22 +14,23 @@ import java.time.LocalDateTime;
 @Table(name = "Comment")
 public class Comment {
 
-    private LocalDateTime createdAt;
-    private Long id;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
-    @NotNull
-    private Long tweetId;
-
-    @NotNull
-    private Long userId;
+    private Long id;
+    
+    private LocalDateTime createdAt;
 
     @NotNull
     @Size(max = 280)
     private String content;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tweet_id")
+    private Tweet tweet;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -48,19 +49,19 @@ public class Comment {
     }
 
     public Long getTweetId() {
-        return tweetId;
+        return tweet != null ? tweet.getId() : null;
     }
 
     public void setTweetId(Long tweetId) {
-        this.tweetId = tweetId;
+        // Bu metod eski kodla uyumluluk için kalabilir
     }
 
     public Long getUserId() {
-        return userId;
+        return user != null ? user.getId() : null;
     }
 
     public void setUserId(Long userId) {
-        this.userId = userId;
+        // Bu metod eski kodla uyumluluk için kalabilir
     }
 
     public LocalDateTime getCreatedAt() {
@@ -69,5 +70,21 @@ public class Comment {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Tweet getTweet() {
+        return tweet;
+    }
+
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

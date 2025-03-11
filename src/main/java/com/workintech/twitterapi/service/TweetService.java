@@ -11,25 +11,30 @@ import java.util.List;
 @Service
 public class TweetService {
 
+    private final TweetRepository tweetRepository;
+
     @Autowired
-    private TweetRepository tweetRepository;
+    public TweetService(TweetRepository tweetRepository) {
+        this.tweetRepository = tweetRepository;
+    }
 
     public Tweet createTweet(Tweet tweet) {
+        tweet.setCreatedAt(LocalDateTime.now());
+        // User nesnesini repository'den alıp tweet'e atayabilirsiniz
         return tweetRepository.save(tweet);
     }
 
     public List<Tweet> getTweetsByUserId(Long userId) {
-        return tweetRepository.findByUserId(userId);
+        return tweetRepository.findByUser_Id(userId);
     }
 
     public Tweet getTweetById(Long id) {
-        return tweetRepository.findById(id).orElse(null);
+        return tweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tweet not found with id: " + id));
     }
 
     public Tweet updateTweet(Long id, Tweet tweet) {
-        Tweet existingTweet = tweetRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tweet not found with id: " + id));
-
+        Tweet existingTweet = getTweetById(id);
         existingTweet.setContent(tweet.getContent());
         existingTweet.setUpdateAt(LocalDateTime.now());
         // Diğer gerekli alanları güncelleyin
@@ -39,5 +44,9 @@ public class TweetService {
 
     public void deleteTweet(Long id) {
         tweetRepository.deleteById(id);
+    }
+
+    public List<Tweet> getAllTweets() {
+        return tweetRepository.findAll();
     }
 }

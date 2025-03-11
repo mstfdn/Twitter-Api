@@ -4,5 +4,5 @@ import com.workintech.twitterapi.entity.Retweet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RetweetRepository extends JpaRepository<Retweet, Long> {
-    boolean existsByTweetIdAndUserId(Long tweetId, Long userId);
+    boolean existsByTweet_IdAndUser_Id(Long tweetId, Long userId);
 }

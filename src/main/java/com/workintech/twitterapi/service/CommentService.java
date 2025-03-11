@@ -23,7 +23,7 @@ public class CommentService {
     }
 
     public List<Comment> getCommentsByTweetId(Long tweetId) {
-        return commentRepository.findByTweetId(tweetId);
+        return commentRepository.findByTweet_Id(tweetId);
     }
 
     public Comment updateComment(Long id, Comment comment) {

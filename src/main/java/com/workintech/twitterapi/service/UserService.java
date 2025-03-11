@@ -2,7 +2,7 @@ package com.workintech.twitterapi.service;
 
 import com.workintech.twitterapi.entity.User;
 import com.workintech.twitterapi.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
+import com.workintech.twitterapi.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,12 @@ public class UserService {
         return false;
     }
 
-
+    public User registerUser(UserDTO userDTO) {
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setEmail(userDTO.getEmail());
+        return userRepository.save(user);
+    }
 
 }

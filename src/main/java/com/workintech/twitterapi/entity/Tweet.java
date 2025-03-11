@@ -3,11 +3,11 @@ package com.workintech.twitterapi.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -21,8 +21,18 @@ public class Tweet {
     @Size(max = 280)
     private String content;
 
-    @NotNull
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Retweet> retweets = new ArrayList<>();
 
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
@@ -44,11 +54,11 @@ public class Tweet {
     }
 
     public Long getUserId() {
-        return userId;
+        return user != null ? user.getId() : null;
     }
 
     public void setUserId(Long userId) {
-        this.userId = userId;
+        // Bu metod eski kodla uyumluluk için kalabilir
     }
 
     public LocalDateTime getCreatedAt() {
@@ -67,15 +77,47 @@ public class Tweet {
         this.updateAt = updateAt;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Retweet> getRetweets() {
+        return retweets;
+    }
+
+    public void setRetweets(List<Retweet> retweets) {
+        this.retweets = retweets;
+    }
+
     // Boş constructor
     public Tweet() {
     }
 
     // Tüm parametreli constructor
-    public Tweet(Long id, String content, Long userId, LocalDateTime createdAt, LocalDateTime updateAt) {
+    public Tweet(Long id, String content, User user, LocalDateTime createdAt, LocalDateTime updateAt) {
         this.id = id;
         this.content = content;
-        this.userId = userId;
+        this.user = user;
         this.createdAt = createdAt;
         this.updateAt = updateAt;
     }
