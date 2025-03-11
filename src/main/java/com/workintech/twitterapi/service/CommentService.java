@@ -26,6 +26,11 @@ public class CommentService {
         return commentRepository.findByTweet_Id(tweetId);
     }
 
+    public Comment getCommentById(Long id) {
+        return commentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Yorum bulunamadı: " + id));
+    }
+
     public Comment updateComment(Long id, Comment comment) {
         Comment existingComment = commentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Comment not found with id: " + id));
