@@ -21,6 +21,7 @@ public class Comment {
     
     private LocalDateTime createdAt;
 
+    //validasyonlar
     @NotNull
     @Size(max = 280)
     private String content;
@@ -56,7 +57,7 @@ public class Comment {
     }
 
     public void setTweetId(Long tweetId) {
-        // Bu metod eski kodla uyumluluk için kalabilir
+
     }
 
     public Long getUserId() {
@@ -64,7 +65,7 @@ public class Comment {
     }
 
     public void setUserId(Long userId) {
-        // Bu metod eski kodla uyumluluk için kalabilir
+
     }
 
     public LocalDateTime getCreatedAt() {

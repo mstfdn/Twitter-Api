@@ -24,7 +24,7 @@ public class RetweetService {
     }
     
     public Retweet createRetweet(User user, Tweet tweet) {
-        // Kullanıcı zaten retweet etmiş mi kontrol et
+
         if (isRetweeted(tweet.getId(), user.getId())) {
             throw new RuntimeException("Bu tweet zaten retweet edilmiş");
         }

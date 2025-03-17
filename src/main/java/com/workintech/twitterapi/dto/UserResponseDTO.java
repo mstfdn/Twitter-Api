@@ -43,7 +43,7 @@ public class UserResponseDTO {
         this.tweets = tweets;
     }
 
-    // İç sınıf olarak tweet özeti
+
     public static class TweetSummaryDTO {
         private Long id;
         private String content;

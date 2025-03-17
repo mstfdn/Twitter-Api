@@ -52,7 +52,7 @@ public class CommentResponseDTO {
         this.user = user;
     }
 
-    // İç sınıf olarak kullanıcı özeti
+
     public static class UserSummaryDTO {
         private Long id;
         private String username;

@@ -27,7 +27,7 @@ public class UserController {
         return convertToDTO(user);
     }
     
-    // Entity'den DTO'ya dönüştürme metodu
+
     private UserResponseDTO convertToDTO(User user) {
         if (user == null) {
             return null;
@@ -38,7 +38,7 @@ public class UserController {
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         
-        // Tweet'leri dönüştür
+
         if (user.getTweets() != null) {
             List<UserResponseDTO.TweetSummaryDTO> tweetDTOs = user.getTweets().stream()
                 .map(tweet -> new UserResponseDTO.TweetSummaryDTO(

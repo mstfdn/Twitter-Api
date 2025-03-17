@@ -26,13 +26,13 @@ public class Retweet {
     @JsonBackReference(value = "user-retweets")
     private User user;
 
-    // Eski metodlar uyumluluk için kalabilir
+
     public Long getTweetId() {
         return tweet != null ? tweet.getId() : null;
     }
 
     public void setTweetId(Long tweetId) {
-        // Bu metod eski kodla uyumluluk için kalabilir
+
     }
 
     public Long getUserId() {
@@ -40,10 +40,10 @@ public class Retweet {
     }
 
     public void setUserId(Long userId) {
-        // Bu metod eski kodla uyumluluk için kalabilir
+
     }
 
-    // Yeni getter ve setter metodları
+
     public Tweet getTweet() {
         return tweet;
     }

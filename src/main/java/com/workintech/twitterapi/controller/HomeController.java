@@ -23,7 +23,7 @@ public class HomeController {
 
     @GetMapping({"/", "/home"})
     public ResponseEntity<List<TweetResponseDTO>> getHomePage() {
-        // Ana sayfada tüm tweetleri göster (gerçek uygulamada bu daha karmaşık olabilir)
+
         List<Tweet> tweets = tweetService.getAllTweets();
         List<TweetResponseDTO> tweetDTOs = tweets.stream()
                 .map(this::convertToDTO)
@@ -31,7 +31,7 @@ public class HomeController {
         return ResponseEntity.ok(tweetDTOs);
     }
     
-    // Entity'den DTO'ya dönüştürme metodu
+
     private TweetResponseDTO convertToDTO(Tweet tweet) {
         TweetResponseDTO dto = new TweetResponseDTO();
         dto.setId(tweet.getId());

@@ -18,7 +18,7 @@ public class CommentService {
     }
 
     public Comment addComment(Comment comment) {
-        comment.setCreatedAt(LocalDateTime.now()); // Yorum oluşturulma zamanını ayarlayın
+        comment.setCreatedAt(LocalDateTime.now());
         return commentRepository.save(comment);
     }
 
@@ -36,7 +36,7 @@ public class CommentService {
                 .orElseThrow(() -> new RuntimeException("Comment not found with id: " + id));
 
         existingComment.setContent(comment.getContent());
-        // Diğer gerekli alanları buraya ekleyebilirsiniz
+
 
         return commentRepository.save(existingComment);
     }

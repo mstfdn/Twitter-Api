@@ -20,18 +20,18 @@ public class UserService {
     public void addUser(String username, String password, String email) {
         User user = new User();
         user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password)); // Şifreyi şifrele
+        user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
-        userRepository.save(user); // Kullanıcıyı veritabanına kaydet
+        userRepository.save(user);
         System.out.println("Kullanıcı başarıyla eklendi.");
     }
 
-    // Kullanıcıyı kullanıcı adı ile alma metodu
+
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    // Kullanıcı doğrulama metodu
+
     public boolean authenticate(String username, String password) {
         User user = getUserByUsername(username);
         if (user != null) {

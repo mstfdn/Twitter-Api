@@ -36,7 +36,7 @@ public class Like {
     }
 
     public void setTweetId(Long tweetId) {
-        // Bu metod eski kodla uyumluluk için kalabilir
+
     }
 
     public Long getUserId() {
@@ -44,7 +44,7 @@ public class Like {
     }
 
     public void setUserId(Long userId) {
-        // Bu metod eski kodla uyumluluk için kalabilir
+
     }
 
     public Tweet getTweet() {
@@ -63,5 +63,5 @@ public class Like {
         this.user = user;
     }
 
-    // Diğer getter ve setter metodları...
+
 }

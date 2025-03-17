@@ -20,7 +20,6 @@ public class TweetService {
 
     public Tweet createTweet(Tweet tweet) {
         tweet.setCreatedAt(LocalDateTime.now());
-        // User nesnesini repository'den alıp tweet'e atayabilirsiniz
         return tweetRepository.save(tweet);
     }
 
@@ -37,7 +36,7 @@ public class TweetService {
         Tweet existingTweet = getTweetById(id);
         existingTweet.setContent(tweet.getContent());
         existingTweet.setUpdateAt(LocalDateTime.now());
-        // Diğer gerekli alanları güncelleyin
+
 
         return tweetRepository.save(existingTweet);
     }

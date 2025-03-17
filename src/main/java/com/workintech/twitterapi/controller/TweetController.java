@@ -70,7 +70,7 @@ public class TweetController {
         return ResponseEntity.ok(tweetDTOs);
     }
     
-    // Entity'den DTO'ya dönüştürme metodu
+
     private TweetResponseDTO convertToDTO(Tweet tweet) {
         TweetResponseDTO dto = new TweetResponseDTO();
         dto.setId(tweet.getId());

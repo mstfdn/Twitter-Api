@@ -9,7 +9,7 @@ public class TweetResponseDTO {
     private LocalDateTime updateAt;
     private UserSummaryDTO user;
 
-    // Getter ve Setter metodları
+
     public Long getId() {
         return id;
     }
@@ -50,7 +50,7 @@ public class TweetResponseDTO {
         this.user = user;
     }
 
-    // İç sınıf olarak kullanıcı özeti
+
     public static class UserSummaryDTO {
         private Long id;
         private String username;

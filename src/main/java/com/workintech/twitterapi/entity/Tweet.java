@@ -115,11 +115,11 @@ public class Tweet {
         this.retweets = retweets;
     }
 
-    // Boş constructor
+
     public Tweet() {
     }
 
-    // Tüm parametreli constructor
+
     public Tweet(Long id, String content, User user, LocalDateTime createdAt, LocalDateTime updateAt) {
         this.id = id;
         this.content = content;

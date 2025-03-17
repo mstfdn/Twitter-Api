@@ -14,11 +14,12 @@ public class JacksonConfig {
     @Primary
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
-        
-        // Dairesel referansları önle
+
+        //createdAt için kullandığım localdatetime json dönüşümünde sorun çıkarıyor diye burayı kullandım.
+
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         
-        // LocalDateTime desteği ekle
+
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         
